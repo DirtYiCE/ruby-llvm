@@ -1,10 +1,26 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 
+begin
+  require "ruby-debug"
+rescue LoadError
+  # Ignore ruby-debug is case it's not installed
+end
+
 require "test/unit"
 
 require "llvm/core"
 require "llvm/execution_engine"
 require "llvm/transforms/scalar"
+
+class Test::Unit::TestCase
+
+  LLVM_SIGNED = true
+  LLVM_UNSIGNED = false
+
+  LLVM_FALSE = 0
+  LLVM_TRUE = 1
+
+end
 
 def define_module(module_name)
 
